@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode
-@Table(name = "transacoes32")
+@Table(name = "Transacoes")
 public class Transacao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class Transacao {
 	
 	@ManyToOne
 	@Nonnull
-	@JoinColumn(name = "identificadortab_categoria")
+	@JoinColumn(name = "identificadorTAB_Categoria")
 	private Categoria categoria;
 	
 	@Column
@@ -41,7 +41,7 @@ public class Transacao {
 	
 	@ManyToOne
 	@Nonnull
-	@JoinColumn(name = "identificadortab_tipo_transacao")
+	@JoinColumn(name = "identificadorTAB_TipoTransacao")
 	private TipoTransacao tipoTransacao;
 	
 	@Column(name = "data")

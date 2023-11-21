@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "tab_categoria32")
+@Table(name = "TAB_Categoria", schema = "sistematransacoes")
 public class Categoria {
 	
 	@Id

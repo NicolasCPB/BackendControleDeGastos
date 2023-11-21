@@ -16,7 +16,7 @@ import com.controleDeGastos.models.Transacao;
 import com.controleDeGastos.repository.CategoriaRepository;
 import com.controleDeGastos.repository.TipoTransacaoRepository;
 import com.controleDeGastos.repository.TransacaoRepository;
-import com.controleDeGastos.utils.UtilsService;
+import com.controleDeGastos.utils.ConversorUtil;
 
 @Service
 public class TransacaoServiceImpl implements TransacaoService {
@@ -30,13 +30,10 @@ public class TransacaoServiceImpl implements TransacaoService {
 	@Autowired
 	TipoTransacaoRepository tipoTransacaoRepository;
 	
-	@Autowired
-	UtilsService utils;
-	
 	@Override
 	public RetornoEnvioDTO cadastrarTransacao(TransacaoDTO transacao) throws Exception {
 		RetornoEnvioDTO retorno = new RetornoEnvioDTO();
-		Transacao transacaoModel = utils.convertTransacaoToModel(transacao);
+		Transacao transacaoModel = ConversorUtil.convertTransacaoToModel(transacao);
 		Categoria categoria = categoriaRepository.findByNome(transacao.getCategoria().getNome());
 		TipoTransacao tipoTransacao = tipoTransacaoRepository.findByNome(transacao.getTipoTransacao().getNome());
 		
@@ -78,14 +75,14 @@ public class TransacaoServiceImpl implements TransacaoService {
                 filtro.getTipoTransacao().getNome(),
                 filtro.getDataInicial(),
                 filtro.getDataFinal());
-		return transacoes.stream().map(transacao -> {return utils.convertTransacaoToDTO(transacao);}).collect(Collectors.toList());
+		return transacoes.stream().map(transacao -> {return ConversorUtil.convertTransacaoToDTO(transacao);}).collect(Collectors.toList());
 	}
 
 	public List<TransacaoDTO> listarTransacoes() {
 		return repository
 				.findAll()
 				.stream()
-				.map(transacao -> {return utils.convertTransacaoToDTO(transacao);})
+				.map(transacao -> {return ConversorUtil.convertTransacaoToDTO(transacao);})
 				.collect(Collectors.toList());
 	}
 	
